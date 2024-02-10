@@ -17,6 +17,9 @@ import useUserInfo from "./components/userInfo/UserInfoHook";
 import { FollowingPresenter } from "./presenter/FollowingPresenter";
 import { UserItemView } from "./presenter/UserItemPresenter";
 import { FollowersPresenter } from "./presenter/FollowersPresenter";
+import { FeedPresenter } from "./presenter/FeedPresenter";
+import { StatusItemView } from "./presenter/StatusItemPresenter";
+import { StoryPresenter } from "./presenter/StoryPresenter";
 
 
 const App = () => {
@@ -41,33 +44,13 @@ const App = () => {
 };
 
 const AuthenticatedRoutes = () => {
-  
-  const loadMoreFeedItems = async (
-    authToken: AuthToken,
-    user: User,
-    pageSize: number,
-    lastItem: Status | null
-  ): Promise<[Status[], boolean]> => {
-    // TODO: Replace with the result of calling server
-    return FakeData.instance.getPageOfStatuses(lastItem, pageSize);
-  };
-
-  const loadMoreStoryItems = async (
-    authToken: AuthToken,
-    user: User,
-    pageSize: number,
-    lastItem: Status | null
-  ): Promise<[Status[], boolean]> => {
-    // TODO: Replace with the result of calling server
-    return FakeData.instance.getPageOfStatuses(lastItem, pageSize);
-  };
 
   return (
     <Routes>
       <Route element={<MainLayout />}>
         <Route index element={<Navigate to="/feed" />} />
-        <Route path="feed" element={<StatusItemScroller loadItems={loadMoreFeedItems} itemDescription={"feed"} />} />
-        <Route path="story" element={<StatusItemScroller loadItems={loadMoreStoryItems} itemDescription={"story"} />} />
+        <Route path="feed" element={<StatusItemScroller presenterGenerator={(view: StatusItemView) => new FeedPresenter(view)} />} />
+        <Route path="story" element={<StatusItemScroller presenterGenerator={(view: StatusItemView) => new StoryPresenter(view)} />} />
         <Route
           path="following"
           element={
