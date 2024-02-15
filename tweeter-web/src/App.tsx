@@ -19,6 +19,7 @@ import { FollowersPresenter } from "./presenter/FollowersPresenter";
 import { FeedPresenter } from "./presenter/FeedPresenter";
 import { StatusItemView } from "./presenter/StatusItemPresenter";
 import { StoryPresenter } from "./presenter/StoryPresenter";
+import { RegisterPresenter, RegisterView } from "./presenter/RegisterPresenter";
 
 
 const App = () => {
@@ -79,7 +80,7 @@ const UnauthenticatedRoutes = () => {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+      <Route path="/register" element={<Register presenterGenerator={(view: RegisterView) => new RegisterPresenter(view)}/>} />
       <Route path="*" element={<Login originalUrl={location.pathname} />} />
     </Routes>
   );
