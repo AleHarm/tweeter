@@ -44,20 +44,6 @@ const Login = (props: Props) => {
     presenter.doLogin(alias, password, rememberMeRef, props.originalUrl);
   };
 
-  // const login = async (
-  //   alias: string,
-  //   password: string
-  // ): Promise<[User, AuthToken]> => {
-  //   // TODO: Replace with the result of calling the server
-  //   let user = FakeData.instance.firstUser;
-
-  //   if (user === null) {
-  //     throw new Error("Invalid alias or password");
-  //   }
-
-  //   return [user, FakeData.instance.authToken];
-  // };
-
   const inputFieldGenerator = () => {
     return (
       <AuthenticationFields

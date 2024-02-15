@@ -3,18 +3,12 @@ import useUserInfo from "./UserInfoHook";
 import { UserNavigationView, UserNavigationPresenter } from "../../presenter/UserNavigationPresenter";
 import { useState } from "react";
 
-// interface Props {
-//   // presenterGenerator: (view: UserNavigationView) => UserNavigationPresenter;
-// }
 
 const useUserNavigation = (/*props: Props*/) => {
   const { updateUserInfo, setDisplayedUser, currentUser, authToken } =
     useUserInfo();
 
   const { displayErrorToast } = useToaster(); // Destructure the necessary method
-
-  
-  
 
   const listener: UserNavigationView = {
     displayErrorToast: displayErrorToast,
