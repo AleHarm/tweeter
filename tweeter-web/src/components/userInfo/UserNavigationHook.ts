@@ -1,44 +1,33 @@
-import { AuthToken, User, FakeData} from "tweeter-shared";
 import useToaster from "../toaster/ToastHook";
 import useUserInfo from "./UserInfoHook";
+import { UserNavigationView, UserNavigationPresenter } from "../../presenter/UserNavigationPresenter";
+import { useState } from "react";
 
 
-const useUserNavigation = () => {
+const useUserNavigation = (/*props: Props*/) => {
   const { updateUserInfo, setDisplayedUser, currentUser, authToken } =
     useUserInfo();
 
   const { displayErrorToast } = useToaster(); // Destructure the necessary method
 
+  const listener: UserNavigationView = {
+    displayErrorToast: displayErrorToast,
+    setDisplayedUser: setDisplayedUser,
+  }
+
+  const [presenter] = useState(new UserNavigationPresenter(listener));
+
   const navigateToUser = async (event: React.MouseEvent): Promise<void> => {
     event.preventDefault();
-
-    try {
-      let alias = extractAlias(event.target.toString());
-      let user = await getUser(authToken!, alias);
-
-      if (!!user) {
-        if (currentUser!.equals(user)) {
-          setDisplayedUser(currentUser!);
-        } else {
-          setDisplayedUser(user);
-        }
-      }
-    } catch (error) {
-      displayErrorToast(`Failed to get user because of exception: ${error}`, 0);
-    }
+    presenter.navigateToUser(authToken!, currentUser!, event.target.toString());
   };
 
-  const extractAlias = (value: string): string => {
-    let index = value.indexOf("@");
-    return value.substring(index);
-  };
-
-  const getUser = async (
-    authToken: AuthToken,
-    alias: string
-  ): Promise<User | null> => {
-    return FakeData.instance.findUserByAlias(alias);
-  };
+  // const getUser = async (
+  //   authToken: AuthToken,
+  //   alias: string
+  // ): Promise<User | null> => {
+  //   return FakeData.instance.findUserByAlias(alias);
+  // };
 
   return navigateToUser;
 };
