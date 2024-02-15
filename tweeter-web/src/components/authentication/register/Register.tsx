@@ -73,7 +73,7 @@ const Register = (props: Props) => {
     }
   };
 
-  const doRegister =  () => {
+  const doRegister = () => {
 
       presenter.doRegister(firstName, lastName, alias, password, imageBytes, rememberMeRef);
     
