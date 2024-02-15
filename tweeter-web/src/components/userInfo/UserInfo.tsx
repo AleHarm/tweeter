@@ -5,11 +5,8 @@ import useToastListener from "../toaster/ToastListenerHook";
 import useUserInfo from "./UserInfoHook";
 import { UserInfoPresenter, UserInfoView } from "../../presenter/UserInfoPresenter";
 
-interface Props {
-  presenterGenerator: (view: UserInfoView) => UserInfoPresenter;
-}
 
-const UserInfo = (props: Props) => {
+const UserInfo = () => {
   const [isFollower, setIsFollower] = useState(false);
   const [followeesCount, setFolloweesCount] = useState(-1);
   const [followersCount, setFollowersCount] = useState(-1);
@@ -30,7 +27,7 @@ const UserInfo = (props: Props) => {
     setFollowersCount: setFollowersCount
   }
 
-  const [presenter] = useState(props.presenterGenerator(listener));
+  const [presenter] = useState(new UserInfoPresenter(listener));
 
   useEffect(() => {
     presenter.setIsFollowerStatus(authToken!, currentUser!, displayedUser!);
