@@ -4,7 +4,6 @@ import { Presenter, View } from "./Presenter";
 export const PAGE_SIZE = 10;
 
 export interface PagedItemView<T> extends View{
-
   addItems: (items: T[]) => void;
   displayErrorMessage: (message: string) => void;
 }

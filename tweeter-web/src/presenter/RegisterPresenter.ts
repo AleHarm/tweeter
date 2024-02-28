@@ -1,27 +1,13 @@
-import { AuthToken, User } from "tweeter-shared";
-import { UserService } from "../model/service/UserService";
 import { ChangeEvent, Dispatch, MutableRefObject, SetStateAction } from "react";
-import { NavigateFunction } from "react-router-dom";
 import { Buffer } from "buffer";
+import { AuthView, AuthorizationPresenter } from "./AuthorizationPresenter";
 
-export interface RegisterView{
-  navigate: NavigateFunction;
-  updateUserInfo: (currentUser: User, displayedUser: User | null, authToken: AuthToken, remember: boolean) => void;
-  displayErrorMessage: (message: string) => void;
+export interface RegisterView extends AuthView{
   setImageBytes: Dispatch<SetStateAction<Uint8Array>>;
   setImageUrl: Dispatch<SetStateAction<string>>;
 }
 
-export class RegisterPresenter{
-
-  private service: UserService;
-  private _view: RegisterView;
-
-  public constructor(view: RegisterView){
-
-    this._view = view;
-    this.service = new UserService();
-  }
+export class RegisterPresenter extends AuthorizationPresenter<RegisterView>{
 
   public handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -30,7 +16,7 @@ export class RegisterPresenter{
 
   public handleImageFile (file: File | undefined){
     if (file) {
-      this._view.setImageUrl(URL.createObjectURL(file));
+      this.view.setImageUrl(URL.createObjectURL(file));
 
       const reader = new FileReader();
       reader.onload = (event: ProgressEvent<FileReader>) => {
@@ -45,12 +31,12 @@ export class RegisterPresenter{
           "base64"
         );
 
-        this._view.setImageBytes(bytes);
+        this.view.setImageBytes(bytes);
       };
       reader.readAsDataURL(file);
     } else {
-      this._view.setImageUrl("");
-      this._view.setImageBytes(new Uint8Array());
+      this.view.setImageUrl("");
+      this.view.setImageBytes(new Uint8Array());
     }
   };
   
@@ -60,22 +46,19 @@ export class RegisterPresenter{
     password: string, 
     imageBytes: Uint8Array, 
     rememberMeRef: MutableRefObject<boolean>){
-    try {
-      let [user, authToken] = await this.service.register(
-        firstName,
-        lastName,
-        alias,
-        password,
-        imageBytes
-      );
 
-      this._view.updateUserInfo(user, user, authToken, rememberMeRef.current);
-      this._view.navigate("/");
-    } catch (error) {
-      this._view.displayErrorMessage(
-        `Failed to register user because of exception: ${error}`
-      );
-    }
+    let [user, authToken] = await this.service.register(
+      firstName,
+      lastName,
+      alias,
+      password,
+      imageBytes
+    );
+
+    this.authenticate(authToken, user, rememberMeRef);
   };
 
+  protected getItemDescription(): string {
+    return "register user";
+  }
 }
