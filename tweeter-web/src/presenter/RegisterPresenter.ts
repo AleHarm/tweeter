@@ -9,7 +9,7 @@ export interface RegisterView{
   updateUserInfo: (currentUser: User, displayedUser: User | null, authToken: AuthToken, remember: boolean) => void;
   displayErrorMessage: (message: string) => void;
   setImageBytes: Dispatch<SetStateAction<Uint8Array>>;
-    setImageUrl: Dispatch<SetStateAction<string>>;
+  setImageUrl: Dispatch<SetStateAction<string>>;
 }
 
 export class RegisterPresenter{

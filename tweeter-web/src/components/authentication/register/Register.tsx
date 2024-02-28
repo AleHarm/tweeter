@@ -34,7 +34,7 @@ const Register = (props: Props) => {
     updateUserInfo: updateUserInfo,
     displayErrorMessage: displayErrorMessage,
     setImageBytes: setImageBytes,
-    setImageUrl: setImageUrl
+    setImageUrl: setImageUrl,
   };
 
   const [presenter] = useState(props.presenterGenerator(listener));
