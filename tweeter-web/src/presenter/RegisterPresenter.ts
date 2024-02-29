@@ -2,7 +2,7 @@ import { ChangeEvent, Dispatch, MutableRefObject, SetStateAction } from "react";
 import { Buffer } from "buffer";
 import { AuthView, AuthorizationPresenter } from "./AuthorizationPresenter";
 
-export interface RegisterView extends AuthView{
+export interface RegisterView extends AuthView{ 
   setImageBytes: Dispatch<SetStateAction<Uint8Array>>;
   setImageUrl: Dispatch<SetStateAction<string>>;
 }
@@ -47,18 +47,19 @@ export class RegisterPresenter extends AuthorizationPresenter<RegisterView>{
     imageBytes: Uint8Array, 
     rememberMeRef: MutableRefObject<boolean>){
 
-    let [user, authToken] = await this.service.register(
-      firstName,
-      lastName,
-      alias,
-      password,
-      imageBytes
-    );
+    
 
-    this.authenticate(authToken, user, rememberMeRef);
+    this.authenticate(async() =>{
+      return await this.service.register(
+        firstName,
+        lastName,
+        alias,
+        password,
+        imageBytes
+      );}, rememberMeRef);
   };
 
-  protected getItemDescription(): string {
+  protected getActionDescription(): string {
     return "register user";
   }
 }

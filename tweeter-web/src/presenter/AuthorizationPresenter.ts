@@ -29,17 +29,18 @@ export abstract class AuthorizationPresenter<T extends AuthView> extends Present
     return super.view as T;
   }
 
-  public async authenticate(authToken: AuthToken, user: User, rememberMeRef: MutableRefObject<boolean>, originalUrl?: string){
+  public async authenticate(callService: () => Promise<[User, AuthToken]>, rememberMeRef: MutableRefObject<boolean>, originalUrl?: string){
     
     this.doFailureReportingOperation(async () => {
+      let[user, authToken] = await callService();
       this.view.updateUserInfo(user, user, authToken, rememberMeRef.current);
       if (!!originalUrl) {
         this.view.navigate(originalUrl);
       } else {
         this.view.navigate("/");
       }
-    }, this.getItemDescription());
+    }, this.getActionDescription());
   }
 
-  protected abstract getItemDescription(): string;
+  protected abstract getActionDescription(): string;
 }

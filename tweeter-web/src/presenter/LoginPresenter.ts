@@ -11,11 +11,10 @@ export class LoginPresenter extends AuthorizationPresenter<LoginView>{
     rememberMeRef: MutableRefObject<boolean>, 
     originalUrl?: string){
       
-    let [user, authToken] = await this.service.login(alias, password);
-    this.authenticate(authToken, user, rememberMeRef, originalUrl);
+    this.authenticate(async() =>{return this.service.login(alias, password)}, rememberMeRef, originalUrl);
   };
 
-  protected getItemDescription(): string {
+  protected getActionDescription(): string {
     return "log user in";
   }
 }
