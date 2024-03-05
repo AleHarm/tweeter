@@ -13,6 +13,7 @@ import { LoginPresenter, LoginView } from "../../../presenter/LoginPresenter";
 interface Props {
   originalUrl?: string;
   presenterGenerator: (view: LoginView) => LoginPresenter;
+  presenter?: LoginPresenter;
 }
 
 const Login = (props: Props) => {
@@ -37,7 +38,7 @@ const Login = (props: Props) => {
     displayErrorMessage: displayErrorMessage
   };
 
-  const [presenter] = useState(props.presenterGenerator(listener));
+  const [presenter] = useState(props.presenter ?? props.presenterGenerator(listener));
 
   const doLogin = () => {
     
