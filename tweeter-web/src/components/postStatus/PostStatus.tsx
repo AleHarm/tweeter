@@ -1,11 +1,14 @@
 import "./PostStatus.css";
 import { useState } from "react";
-import { AuthToken, Status, User } from "tweeter-shared";
 import useToastListener from "../toaster/ToastListenerHook";
 import useUserInfo from "../userInfo/UserInfoHook";
 import { PostStatusPresenter, PostStatusView } from "../../presenter/PostStatusPresenter";
 
-const PostStatus = () => {
+interface Props {
+  presenter?: PostStatusPresenter;
+}
+
+const PostStatus = (props: Props) => {
   const { displayErrorMessage, displayInfoMessage, clearLastInfoMessage } =
     useToastListener();
 
@@ -19,44 +22,13 @@ const PostStatus = () => {
     clearLastInfoMessage: clearLastInfoMessage,
   }
 
-  const [presenter] = useState(new PostStatusPresenter(listener));
-
-
-  // const submitPost = async (event: React.MouseEvent) => {
-  //   event.preventDefault();
-
-  //   try {
-  //     displayInfoMessage("Posting status...", 0);
-
-  //     let status = new Status(post, currentUser!, Date.now());
-
-  //     await postStatus(authToken!, status);
-
-  //     clearLastInfoMessage();
-  //     setPost("");
-  //     displayInfoMessage("Status posted!", 2000);
-  //   } catch (error) {
-  //     displayErrorMessage(
-  //       `Failed to post the status because of exception: ${error}`
-  //     );
-  //   }
-  // };
+  const [presenter] = useState(props.presenter ?? new PostStatusPresenter(listener));
 
   const submitPost = async (event: React.MouseEvent) => {
     event.preventDefault();
     presenter.submitPost(event, post, currentUser!, authToken!);
     
   };
-
-  // const postStatus = async (
-  //   authToken: AuthToken,
-  //   newStatus: Status
-  // ): Promise<void> => {
-  //   // Pause so we can see the logging out message. Remove when connected to the server
-  //   await new Promise((f) => setTimeout(f, 2000));
-
-  //   // TODO: Call the server to post the status
-  // };
 
   const clearPost = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -73,6 +45,7 @@ const PostStatus = () => {
         <textarea
           className="form-control"
           id="postStatusTextArea"
+          aria-label="postField"
           rows={10}
           placeholder="What's on your mind?"
           value={post}
@@ -93,6 +66,7 @@ const PostStatus = () => {
         </button>
         <button
           id="clearStatusButton"
+          data-testid="clearStatusButton"
           className="btn btn-md btn-secondary"
           type="button"
           disabled={checkButtonStatus()}
