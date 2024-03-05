@@ -2,10 +2,9 @@ import "./AppNavbar.css";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { NavLink, useLocation } from "react-router-dom";
 import Image from "react-bootstrap/Image";
-import { AuthToken } from "tweeter-shared";
 import useToastListener from "../toaster/ToastListenerHook";
 import useUserInfo from "../userInfo/UserInfoHook";
-import { LogOutView, LogOutPresenter } from "../../presenter/LogOutPresenter";
+import { AppNavbarView, AppNavbarPresenter } from "../../presenter/AppNavbarPresenter";
 import { useState } from "react";
 
 
@@ -15,18 +14,18 @@ const AppNavbar = () => {
   const { displayInfoMessage, displayErrorMessage, clearLastInfoMessage } =
     useToastListener();
 
-  const listener: LogOutView = { 
+  const listener: AppNavbarView = { 
     displayErrorMessage: displayErrorMessage,
     displayInfoMessage: displayInfoMessage,
     clearLastInfoMessage: clearLastInfoMessage,
     clearUserInfo: clearUserInfo
   };
 
-  const [presenter] = useState(new LogOutPresenter(listener));
+  const [presenter] = useState(new AppNavbarPresenter(listener));
 
   const logOut = async () => {
     
-    presenter.logOut(authToken!);
+    presenter.logout(authToken!);
   };
 
 

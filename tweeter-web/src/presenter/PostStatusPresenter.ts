@@ -12,13 +12,18 @@ export interface PostStatusView{
 
 export class PostStatusPresenter{
 
-  private service: StatusService;
+  private _service: StatusService;
   private _view: PostStatusView;
 
   public constructor(view: PostStatusView){
 
     this._view = view;
-    this.service = new StatusService();
+    this._service = new StatusService();
+  }
+
+  public get service(){
+
+    return this._service;
   }
 
   public async submitPost (event: React.MouseEvent, post: string, currentUser: User, authToken: AuthToken) {
@@ -36,7 +41,7 @@ export class PostStatusPresenter{
       this._view.displayInfoMessage("Status posted!", 2000);
     } catch (error) {
       this._view.displayErrorMessage(
-        `Failed to post the status because of exception: ${error}`
+        `Failed to post the status because of exception: ${(error as Error).message}`
       );
     }
   };
