@@ -1,0 +1,5 @@
+BUCKET='tweetercs340w2024'
+EDIT_LAMBDALIST='
+login
+'
+LAMBDALAYER_ARN='TODO: Add amazon resource  name here, create layer manually to get it'

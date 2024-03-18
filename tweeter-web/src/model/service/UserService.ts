@@ -1,7 +1,10 @@
-import { AuthToken, User, FakeData } from "tweeter-shared";
+import { AuthToken, User, FakeData, ServerFacade, LoginRequest } from "tweeter-shared";
+
 import { Buffer } from "buffer";
 
 export class UserService{
+
+  server = new ServerFacade();
 
   public async getIsFollowerStatus (
     authToken: AuthToken,
@@ -60,14 +63,10 @@ export class UserService{
     alias: string,
     password: string
   ): Promise<[User, AuthToken]>{
-    // TODO: Replace with the result of calling the server
-    let user = FakeData.instance.firstUser;
+    let request = new LoginRequest(alias, password);
+    let response = await this.server.login(request)
 
-    if (user === null) {
-      throw new Error("Invalid alias or password");
-    }
-
-    return [user, FakeData.instance.authToken];
+    return [response.user, response.token];
   };
 
   public async logout (authToken: AuthToken): Promise<void> {
