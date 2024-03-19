@@ -2,4 +2,4 @@ BUCKET='tweetercs340w2024'
 EDIT_LAMBDALIST='
 login
 '
-LAMBDALAYER_ARN='TODO: Add amazon resource  name here, create layer manually to get it'
+LAMBDALAYER_ARN='arn:aws:lambda:us-east-2:058264231368:layer:tweeterServer:3'
