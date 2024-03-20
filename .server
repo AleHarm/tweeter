@@ -1,5 +1,6 @@
 BUCKET='tweetercs340w2024'
 EDIT_LAMBDALIST='
 login
+logout
 '
-LAMBDALAYER_ARN='arn:aws:lambda:us-east-2:058264231368:layer:tweeterServer:3'
+LAMBDALAYER_ARN='arn:aws:lambda:us-east-2:058264231368:layer:tweeterServer:4'

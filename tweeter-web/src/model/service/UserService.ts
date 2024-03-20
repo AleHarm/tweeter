@@ -1,6 +1,10 @@
-import { AuthToken, User, FakeData, ServerFacade, LoginRequest } from "tweeter-shared";
-
 import { Buffer } from "buffer";
+import { ServerFacade } from "../../net/ServerFacade";
+import { User, } from "../../../../tweeter-shared/src/model/domain/User";
+import { AuthToken } from "../../../../tweeter-shared/src/model/domain/AuthToken";
+import { FakeData } from "../../../../tweeter-shared/src/util/FakeData";
+import { LoginRequest } from "../../../../tweeter-shared/src/model/net/Requests/LoginRequest";
+import { LogoutRequest } from "../../../../tweeter-shared/src/model/net/Requests/LogoutRequest";
 
 export class UserService{
 
@@ -70,7 +74,7 @@ export class UserService{
   };
 
   public async logout (authToken: AuthToken): Promise<void> {
-    // Pause so we can see the logging out message. Delete when the call to the server is implemented.
-    await new Promise((res) => setTimeout(res, 1000));
+    let request = new LogoutRequest(authToken);
+    await this.server.logout(request);
   };
 }

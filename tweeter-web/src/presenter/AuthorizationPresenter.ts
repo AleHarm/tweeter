@@ -1,8 +1,9 @@
-import { AuthToken, User } from "tweeter-shared";
 import { Presenter, View } from "./Presenter";
 import { NavigateFunction } from "react-router-dom";
 import { UserService } from "../model/service/UserService";
 import { MutableRefObject } from "react";
+import { User } from "tweeter-shared/src/model/domain/User";
+import { AuthToken } from "tweeter-shared/src/model/domain/AuthToken";
 
 export interface AuthView extends View{
 

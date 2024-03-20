@@ -20,9 +20,10 @@ import { StoryPresenter } from "./presenter/StoryPresenter";
 import { RegisterPresenter, RegisterView } from "./presenter/RegisterPresenter";
 import { LoginView, LoginPresenter } from "./presenter/LoginPresenter";
 import ItemScroller from "./components/mainLayout/ItemScroller";
-import { Status, User } from "tweeter-shared";
 import UserItem from "./components/userItem/UserItem";
 import StatusItem from "./components/statusItem/StatusItem";
+import { Status } from "tweeter-shared/src/model/domain/Status";
+import { User } from "tweeter-shared/src/model/domain/User";
 
 
 const App = () => {

@@ -1,6 +1,6 @@
-import { User } from "tweeter-shared";
 import { Link } from "react-router-dom";
 import useUserNavigation from "../userInfo/UserNavigationHook";
+import { User } from "tweeter-shared/src/model/domain/User";
 
 interface Props {
   item: User;

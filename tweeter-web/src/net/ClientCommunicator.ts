@@ -1,5 +1,4 @@
 import { Request } from "tweeter-shared/src/model/net/Requests/Request";
-import fetch from "isomorphic-fetch"
 
 export class ClientCommunicator {
   private SERVER_URL: string;

@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handler = void 0;
-const tweeter_shared_1 = require("tweeter-shared");
 const UserService_1 = require("../model/service/UserService");
+const Response_1 = require("tweeter-shared/dist/model/net/Response");
 const handler = (event) => __awaiter(void 0, void 0, void 0, function* () {
-    let response = new tweeter_shared_1.AuthenticateResponse(...yield new UserService_1.UserService().login(event.username, event.password));
+    let response = new Response_1.AuthenticateResponse(...yield new UserService_1.UserService().login(event.username, event.password));
     return response;
 });
 exports.handler = handler;
