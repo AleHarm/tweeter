@@ -5,6 +5,7 @@ import { AuthToken } from "../../../../tweeter-shared/src/model/domain/AuthToken
 import { FakeData } from "../../../../tweeter-shared/src/util/FakeData";
 import { LoginRequest } from "../../../../tweeter-shared/src/model/net/Requests/LoginRequest";
 import { LogoutRequest } from "../../../../tweeter-shared/src/model/net/Requests/LogoutRequest";
+import { RegisterRequest } from "../../../../tweeter-shared/src/model/net/Requests/RegisterRequest";
 
 export class UserService{
 
@@ -46,14 +47,10 @@ export class UserService{
     let imageStringBase64: string =
       Buffer.from(userImageBytes).toString("base64");
 
-    // TODO: Replace with the result of calling the server
-    let user = FakeData.instance.firstUser;
+    let request = new RegisterRequest(firstName, lastName, alias, password, imageStringBase64);
+    let response = await this.server.register(request)
 
-    if (user === null) {
-      throw new Error("Invalid registration");
-    }
-
-    return [user, FakeData.instance.authToken];
+    return [response.user, response.token];
   };
 
   public async getUser (

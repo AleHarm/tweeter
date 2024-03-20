@@ -9,6 +9,7 @@ export { AuthToken } from "./model/domain/AuthToken";
 export { FakeData } from "./util/FakeData";
 export type { Request } from "./model/net/Requests/Request";
 export { LoginRequest } from "./model/net/Requests/LoginRequest";
-export { LogoutRequest } from "./model/net/Requests/LogoutRequest"
+export { LogoutRequest } from "./model/net/Requests/LogoutRequest";
+export { RegisterRequest } from "./model/net/Requests/RegisterRequest";
 export { Response } from "./model/net/Response";
 export { AuthenticateResponse } from "./model/net/Response";

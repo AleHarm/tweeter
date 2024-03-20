@@ -17,7 +17,7 @@ class UserService {
             // TODO: Replace with the result of calling the server
             let user = tweeter_shared_1.FakeData.instance.firstUser;
             if (user === null) {
-                throw new Error("Invalid alias or password");
+                throw new Error("[BadRequest] Invalid alias or password");
             }
             return [true, user, tweeter_shared_1.FakeData.instance.authToken];
         });
@@ -30,5 +30,15 @@ class UserService {
         });
     }
     ;
+    register(firstName, lastName, alias, password, imageStringBase64) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // TODO: Replace with the result of calling the server
+            let user = tweeter_shared_1.FakeData.instance.firstUser;
+            if (user === null) {
+                throw new Error("[BadRequest] Invalid registration");
+            }
+            return [true, user, tweeter_shared_1.FakeData.instance.authToken];
+        });
+    }
 }
 exports.UserService = UserService;
