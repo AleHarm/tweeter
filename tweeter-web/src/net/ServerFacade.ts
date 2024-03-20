@@ -18,6 +18,7 @@ export class ServerFacade {
   }
 
   async logout(request: LogoutRequest): Promise<void> {
+  async logout(request: LogoutRequest): Promise<void> {
     const endpoint = "/logout";
     await this.clientCommunicator.doPost<LogoutRequest>(request, endpoint);
   }
