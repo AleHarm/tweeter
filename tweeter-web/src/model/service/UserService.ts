@@ -6,6 +6,8 @@ import { FakeData } from "../../../../tweeter-shared/src/util/FakeData";
 import { LoginRequest } from "../../../../tweeter-shared/src/model/net/Requests/LoginRequest";
 import { LogoutRequest } from "../../../../tweeter-shared/src/model/net/Requests/LogoutRequest";
 import { RegisterRequest } from "../../../../tweeter-shared/src/model/net/Requests/RegisterRequest";
+import { GetUserRequest } from "../../../../tweeter-shared/src/model/net/Requests/GetUserRequest";
+
 
 export class UserService{
 
@@ -48,7 +50,7 @@ export class UserService{
       Buffer.from(userImageBytes).toString("base64");
 
     let request = new RegisterRequest(firstName, lastName, alias, password, imageStringBase64);
-    let response = await this.server.register(request)
+    let response = await this.server.register(request);
 
     return [response.user, response.token];
   };
@@ -57,7 +59,11 @@ export class UserService{
     authToken: AuthToken,
     alias: string
   ): Promise<User | null>{
-    return FakeData.instance.findUserByAlias(alias);
+
+    let request = new GetUserRequest(alias, authToken);
+    let response = await this.server.getUser(request);
+
+    return response.user;
   };
 
   public async login(
@@ -65,7 +71,7 @@ export class UserService{
     password: string
   ): Promise<[User, AuthToken]>{
     let request = new LoginRequest(alias, password);
-    let response = await this.server.login(request)
+    let response = await this.server.login(request);
 
     return [response.user, response.token];
   };

@@ -40,5 +40,16 @@ class UserService {
             return [true, user, tweeter_shared_1.FakeData.instance.authToken];
         });
     }
+    getUser(authToken, alias) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // TODO: Replace with the result of calling the server
+            let user = tweeter_shared_1.FakeData.instance.findUserByAlias(alias);
+            if (user === null) {
+                throw new Error("[BadRequest] Invalid alias or authToken");
+            }
+            return [true, user];
+        });
+    }
+    ;
 }
 exports.UserService = UserService;

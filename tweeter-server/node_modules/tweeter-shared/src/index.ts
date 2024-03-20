@@ -11,5 +11,6 @@ export type { Request } from "./model/net/Requests/Request";
 export { LoginRequest } from "./model/net/Requests/LoginRequest";
 export { LogoutRequest } from "./model/net/Requests/LogoutRequest";
 export { RegisterRequest } from "./model/net/Requests/RegisterRequest";
+export { GetUserRequest } from "./model/net/Requests/GetUserRequest";
 export { Response } from "./model/net/Response";
 export { AuthenticateResponse } from "./model/net/Response";
