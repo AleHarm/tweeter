@@ -21,7 +21,7 @@ export class UserService{
 
     if(authToken === null){
 
-      throw new Error("[Bad Request] Invalid alias or password");
+      throw new Error("[BadRequest] Invalid alias or password");
     }
 
     await new Promise((res) => setTimeout(res, 1000));
@@ -64,6 +64,20 @@ export class UserService{
   ): Promise<[boolean, number]>{
      // TODO: Replace with the result of calling server
      let value: number = await FakeData.instance.getFollowersCount(user);
+
+    if (value === null) {
+      throw new Error("[BadRequest] Invalid user");
+    }
+
+    return [true, value];
+  };
+
+  public async getFolloweesCount(
+    user: User,
+    authToken: AuthToken
+  ): Promise<[boolean, number]>{
+     // TODO: Replace with the result of calling server
+    let value = await FakeData.instance.getFolloweesCount(user);
 
     if (value === null) {
       throw new Error("[BadRequest] Invalid user");

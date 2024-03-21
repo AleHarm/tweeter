@@ -4,7 +4,8 @@ import {
   LogoutRequest, 
   RegisterRequest,
   GetUserRequest,
-  GetFollowersCountRequest } from "tweeter-shared/src/model/net/Request";
+  GetFollowersCountRequest,
+  GetFolloweesCountRequest } from "tweeter-shared/src/model/net/Request";
 import { 
   AuthenticateResponse,
   GetNumberResponse,
@@ -46,6 +47,13 @@ export class ServerFacade {
   async getFollowersCount(request: GetFollowersCountRequest): Promise<GetNumberResponse> {
     const endpoint = "/getFollowersCount";
     const response: JSON = await this.clientCommunicator.doPost<GetFollowersCountRequest>(request, endpoint);
+
+    return GetNumberResponse.fromJson(response);
+  }
+
+  async getFolloweesCount(request: GetFolloweesCountRequest): Promise<GetNumberResponse> {
+    const endpoint = "/getFolloweesCount";
+    const response: JSON = await this.clientCommunicator.doPost<GetFolloweesCountRequest>(request, endpoint);
 
     return GetNumberResponse.fromJson(response);
   }

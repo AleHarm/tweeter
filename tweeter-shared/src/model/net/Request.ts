@@ -6,6 +6,18 @@ export interface Request{
   
 }
 
+export class GetFolloweesCountRequest implements Request{
+
+  authToken: AuthToken;
+  user: User;
+
+  constructor(authToken: AuthToken, user: User){
+
+    this.authToken = authToken;
+    this.user = user;
+  }
+}
+
 export class GetFollowersCountRequest implements Request{
 
   authToken: AuthToken;

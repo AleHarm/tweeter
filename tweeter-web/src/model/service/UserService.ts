@@ -8,7 +8,8 @@ import {
   LogoutRequest, 
   RegisterRequest, 
   GetUserRequest, 
-  GetFollowersCountRequest } from "../../../../tweeter-shared/src/model/net/Request";
+  GetFollowersCountRequest,
+  GetFolloweesCountRequest } from "../../../../tweeter-shared/src/model/net/Request";
 
 
 export class UserService{
@@ -28,8 +29,11 @@ export class UserService{
     authToken: AuthToken,
     user: User
   ): Promise<number>{
-    // TODO: Replace with the result of calling server
-    return FakeData.instance.getFolloweesCount(user);
+
+    let request = new GetFolloweesCountRequest(authToken, user);
+    let response = await this.server.getFolloweesCount(request);
+
+    return response.value;
   };
 
   public async getFollowersCount(
