@@ -4,5 +4,6 @@ login
 logout
 register
 getUser
+getFollowersCount
 '
-LAMBDALAYER_ARN='arn:aws:lambda:us-east-2:058264231368:layer:tweeterServer:12'
+LAMBDALAYER_ARN='arn:aws:lambda:us-east-2:058264231368:layer:tweeterServer:13'

@@ -26,6 +26,9 @@ class UserService {
     logout(authToken) {
         return __awaiter(this, void 0, void 0, function* () {
             // Pause so we can see the logging out message. Delete when the call to the server is implemented.
+            if (authToken === null) {
+                throw new Error("[Bad Request] Invalid alias or password");
+            }
             yield new Promise((res) => setTimeout(res, 1000));
         });
     }
@@ -48,6 +51,17 @@ class UserService {
                 throw new Error("[BadRequest] Invalid alias or authToken");
             }
             return [true, user];
+        });
+    }
+    ;
+    getFollowersCount(user, authToken) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // TODO: Replace with the result of calling server
+            let value = yield tweeter_shared_1.FakeData.instance.getFollowersCount(user);
+            if (value === null) {
+                throw new Error("[BadRequest] Invalid user");
+            }
+            return [true, value];
         });
     }
     ;

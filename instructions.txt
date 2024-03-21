@@ -1,0 +1,47 @@
+-AWS
+	- Create lambda on AWS
+	- Change lambda handler URL to 'dist/lambda/<FunctionName>Lambda.handler'
+	- Add resource path in API Gateway
+		- Create resource
+		- Add POST method to path
+		- Enable CORS on resource path
+		- Add 400 error
+			- Create Method Response on POST with 400 and body type 'application/json'
+			- Create Integration Response on POST with '^\[BadRequest\].*' REGEX
+		- Deploy API with dev
+- Tweeter-web
+	- Open relevant service
+		- Create request and response above current code in relevant function
+		- Import non-existent request from tweeter-shared (using other imports as a template)
+	- Open ServerFacade
+		- Copy another functino as a template
+		- Change types as appropriate
+		- Import non-existent types
+- Tweeter-shared
+	- Duplicate another request and edit to meet needs (Possibly just add to request class)
+	- Add reseponse to Response if needed
+	- Build (so tweeter-server can see values)
+- Tweeter-server
+	- Make lambda (use dist for imports)
+	- Add function to relevant service class (Cut code from tweeter-web service class)
+- Building
+	- tsc tweeter-server
+	- create nodejs file
+		- Place node_modules file inside
+		- Copy tweeter-shared files into nodejs/node_modules
+		- zip it
+	- zip tweeter-server dist and place in parent folder (tweeter-web-starter)
+	- Update lambdas
+		- Update .server file with proper lambda names
+		- Run uploadLambdas.sh
+	- Update layer 
+		- Go to AWS and upload nodejs zip as new layer version (add node.js 20.x as compatible runtime) 
+		- update .server with new version number
+		- Run updateLayer.sh
+	- build tweeter-web
+	- run tweeter-web
+
+- Fix whatever you missed
+- Celebrate
+- COMMIT
+	

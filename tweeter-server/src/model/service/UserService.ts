@@ -57,4 +57,18 @@ export class UserService{
 
     return [true, user];
   };
+
+  public async getFollowersCount(
+    user: User,
+    authToken: AuthToken
+  ): Promise<[boolean, number]>{
+     // TODO: Replace with the result of calling server
+     let value: number = await FakeData.instance.getFollowersCount(user);
+
+    if (value === null) {
+      throw new Error("[BadRequest] Invalid user");
+    }
+
+    return [true, value];
+  };
 }

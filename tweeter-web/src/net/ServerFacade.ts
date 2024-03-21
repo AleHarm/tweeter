@@ -3,8 +3,10 @@ import { LoginRequest } from "tweeter-shared/src/model/net/Requests/LoginRequest
 import { LogoutRequest } from "tweeter-shared/src/model/net/Requests/LogoutRequest";
 import { RegisterRequest } from "tweeter-shared/src/model/net/Requests/RegisterRequest";
 import { GetUserRequest } from "tweeter-shared/src/model/net/Requests/GetUserRequest";
+import { GetFollowersCountRequest } from "tweeter-shared/src/model/net/Requests/GetFollowersCountRequest";
 import { AuthenticateResponse } from "tweeter-shared/src/model/net/Response";
 import { GetUserResponse } from "tweeter-shared/src/model/net/Response";
+import { GetNumberResponse } from "tweeter-shared/src/model/net/Response";
 
 
 export class ServerFacade {
@@ -37,5 +39,12 @@ export class ServerFacade {
     const response: JSON = await this.clientCommunicator.doPost<GetUserRequest>(request, endpoint);
 
     return GetUserResponse.fromJson(response);
+  }
+
+  async getFollowersCount(request: GetFollowersCountRequest): Promise<GetNumberResponse> {
+    const endpoint = "/getFollowersCount";
+    const response: JSON = await this.clientCommunicator.doPost<GetFollowersCountRequest>(request, endpoint);
+
+    return GetNumberResponse.fromJson(response);
   }
 }

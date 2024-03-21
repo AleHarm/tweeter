@@ -125,3 +125,44 @@ export class GetUserResponse extends Response {
     );
   }
 }
+
+export class GetNumberResponse extends Response {
+  private _value: number;
+
+  constructor(
+    success: boolean,
+    value: number,
+    message: string | null = null
+  ) {
+    super(success, message);
+    this._value = value;
+  }
+
+  get value() {
+    return this._value;
+  }
+
+
+  static fromJson(json: JSON): GetNumberResponse {
+    interface GetNumberResponseJson extends ResponseJson {
+      _value: JSON;
+    }
+
+    const jsonObject: GetNumberResponseJson =
+      json as unknown as GetNumberResponseJson;
+    const deserializedNumber: number = parseInt(JSON.stringify(jsonObject._value));
+
+    if (deserializedNumber === null) {
+      throw new Error(
+        "GetNumberResponse, could not deserialize user with json:\n" +
+          JSON.stringify(jsonObject._value)
+      );
+    }
+
+    return new GetNumberResponse(
+      jsonObject._success,
+      deserializedNumber,
+      jsonObject._message
+    );
+  }
+}

@@ -7,6 +7,7 @@ import { LoginRequest } from "../../../../tweeter-shared/src/model/net/Requests/
 import { LogoutRequest } from "../../../../tweeter-shared/src/model/net/Requests/LogoutRequest";
 import { RegisterRequest } from "../../../../tweeter-shared/src/model/net/Requests/RegisterRequest";
 import { GetUserRequest } from "../../../../tweeter-shared/src/model/net/Requests/GetUserRequest";
+import { GetFollowersCountRequest } from "../../../../tweeter-shared/src/model/net/Requests/GetFollowersCountRequest";
 
 
 export class UserService{
@@ -34,8 +35,11 @@ export class UserService{
     authToken: AuthToken,
     user: User
   ): Promise<number>{
-    // TODO: Replace with the result of calling server
-    return FakeData.instance.getFollowersCount(user);
+
+    let request = new GetFollowersCountRequest(authToken, user);
+    let response = await this.server.getFollowersCount(request);
+
+    return response.value;
   };
 
   public async register(
