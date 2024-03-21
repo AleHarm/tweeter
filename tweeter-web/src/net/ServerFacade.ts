@@ -6,7 +6,8 @@ import {
   GetUserRequest,
   GetFollowersCountRequest,
   GetFolloweesCountRequest,
-  GetIsFollowerStatusRequest } from "tweeter-shared/src/model/net/Request";
+  GetIsFollowerStatusRequest,
+  PostStatusRequest } from "tweeter-shared/src/model/net/Request";
 import { 
   AuthenticateResponse,
   GetNumberResponse,
@@ -65,5 +66,10 @@ export class ServerFacade {
     const response: JSON = await this.clientCommunicator.doPost<GetIsFollowerStatusRequest>(request, endpoint);
 
     return GetBooleanResponse.fromJson(response);
+  }
+
+  async postStatus(request: PostStatusRequest): Promise<void> {
+    const endpoint = "/postStatus";
+    await this.clientCommunicator.doPost<PostStatusRequest>(request, endpoint);
   }
 }

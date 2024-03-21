@@ -2,7 +2,6 @@ import { Buffer } from "buffer";
 import { ServerFacade } from "../../net/ServerFacade";
 import { User, } from "../../../../tweeter-shared/src/model/domain/User";
 import { AuthToken } from "../../../../tweeter-shared/src/model/domain/AuthToken";
-import { FakeData } from "../../../../tweeter-shared/src/util/FakeData";
 import { 
   LoginRequest, 
   LogoutRequest, 

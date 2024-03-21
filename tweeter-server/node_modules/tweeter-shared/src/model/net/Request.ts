@@ -1,5 +1,6 @@
 import { AuthToken } from "../domain/AuthToken";
 import { User } from "../domain/User";
+import { Status } from "../domain/Status";
 
 export interface Request{
 
@@ -99,5 +100,17 @@ export class GetIsFollowerStatusRequest implements Request{
     this.authToken = authToken;
     this.user = user;
     this.selectedUser = selectedUser;
+  }
+}
+
+export class PostStatusRequest implements Request{
+
+  authToken: AuthToken;
+  newStatus: Status
+
+  constructor(authToken: AuthToken, newStatus: Status){
+
+    this.authToken = authToken;
+    this.newStatus = newStatus;
   }
 }
