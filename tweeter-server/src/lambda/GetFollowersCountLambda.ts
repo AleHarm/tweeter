@@ -1,4 +1,4 @@
-import { GetFollowersCountRequest } from "tweeter-shared/dist/model/net/Requests/GetFollowersCountRequest";
+import { GetFollowersCountRequest } from "tweeter-shared/dist/model/net/Request";
 import { UserService } from "../model/service/UserService";
 import { GetNumberResponse } from "tweeter-shared/dist/model/net/Response";
 

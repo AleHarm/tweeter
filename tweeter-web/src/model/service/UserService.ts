@@ -3,11 +3,12 @@ import { ServerFacade } from "../../net/ServerFacade";
 import { User, } from "../../../../tweeter-shared/src/model/domain/User";
 import { AuthToken } from "../../../../tweeter-shared/src/model/domain/AuthToken";
 import { FakeData } from "../../../../tweeter-shared/src/util/FakeData";
-import { LoginRequest } from "../../../../tweeter-shared/src/model/net/Requests/LoginRequest";
-import { LogoutRequest } from "../../../../tweeter-shared/src/model/net/Requests/LogoutRequest";
-import { RegisterRequest } from "../../../../tweeter-shared/src/model/net/Requests/RegisterRequest";
-import { GetUserRequest } from "../../../../tweeter-shared/src/model/net/Requests/GetUserRequest";
-import { GetFollowersCountRequest } from "../../../../tweeter-shared/src/model/net/Requests/GetFollowersCountRequest";
+import { 
+  LoginRequest, 
+  LogoutRequest, 
+  RegisterRequest, 
+  GetUserRequest, 
+  GetFollowersCountRequest } from "../../../../tweeter-shared/src/model/net/Request";
 
 
 export class UserService{

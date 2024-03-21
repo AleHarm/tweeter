@@ -1,4 +1,4 @@
-import { GetUserRequest } from "tweeter-shared/dist/model/net/Requests/GetUserRequest";
+import { GetUserRequest } from "tweeter-shared/dist/model/net/Request";
 import { UserService } from "../model/service/UserService";
 import { GetUserResponse } from "tweeter-shared/dist/model/net/Response";
 

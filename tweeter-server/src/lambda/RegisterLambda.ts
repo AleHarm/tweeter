@@ -1,4 +1,4 @@
-import { RegisterRequest } from "tweeter-shared/dist/model/net/Requests/RegisterRequest";
+import { RegisterRequest } from "tweeter-shared/dist/model/net/Request";
 import { UserService } from "../model/service/UserService";
 import { AuthenticateResponse } from "tweeter-shared/dist/model/net/Response";
 

@@ -18,8 +18,9 @@
 		- Change types as appropriate
 		- Import non-existent types
 - Tweeter-shared
-	- Duplicate another request and edit to meet needs (Possibly just add to request class)
+	- Add request to request class
 	- Add reseponse to Response if needed
+	- Export request from index.ts
 	- Build (so tweeter-server can see values)
 - Tweeter-server
 	- Make lambda (use dist for imports)

@@ -1,12 +1,14 @@
 import { ClientCommunicator } from "./ClientCommunicator";
-import { LoginRequest } from "tweeter-shared/src/model/net/Requests/LoginRequest";
-import { LogoutRequest } from "tweeter-shared/src/model/net/Requests/LogoutRequest";
-import { RegisterRequest } from "tweeter-shared/src/model/net/Requests/RegisterRequest";
-import { GetUserRequest } from "tweeter-shared/src/model/net/Requests/GetUserRequest";
-import { GetFollowersCountRequest } from "tweeter-shared/src/model/net/Requests/GetFollowersCountRequest";
-import { AuthenticateResponse } from "tweeter-shared/src/model/net/Response";
-import { GetUserResponse } from "tweeter-shared/src/model/net/Response";
-import { GetNumberResponse } from "tweeter-shared/src/model/net/Response";
+import { 
+  LoginRequest, 
+  LogoutRequest, 
+  RegisterRequest,
+  GetUserRequest,
+  GetFollowersCountRequest } from "tweeter-shared/src/model/net/Request";
+import { 
+  AuthenticateResponse,
+  GetNumberResponse,
+  GetUserResponse } from "tweeter-shared/src/model/net/Response";
 
 
 export class ServerFacade {
