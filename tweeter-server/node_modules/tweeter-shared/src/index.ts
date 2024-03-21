@@ -14,6 +14,7 @@ export {
   LogoutRequest, 
   LoginRequest, 
   GetFollowersCountRequest,
-  GetFolloweesCountRequest } from "./model/net/Request";
+  GetFolloweesCountRequest,
+  GetIsFollowerStatusRequest } from "./model/net/Request";
 export { Response } from "./model/net/Response";
 export { AuthenticateResponse } from "./model/net/Response";

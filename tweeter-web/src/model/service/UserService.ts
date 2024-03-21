@@ -9,7 +9,8 @@ import {
   RegisterRequest, 
   GetUserRequest, 
   GetFollowersCountRequest,
-  GetFolloweesCountRequest } from "../../../../tweeter-shared/src/model/net/Request";
+  GetFolloweesCountRequest,
+  GetIsFollowerStatusRequest } from "../../../../tweeter-shared/src/model/net/Request";
 
 
 export class UserService{
@@ -21,8 +22,11 @@ export class UserService{
     user: User,
     selectedUser: User
   ): Promise<boolean>{
-    // TODO: Replace with the result of calling server
-    return FakeData.instance.isFollower();
+
+    let request = new GetIsFollowerStatusRequest(authToken, user, selectedUser);
+    let response = await this.server.getIsFollowerStatus(request);
+
+    return response.value;
   };
 
   public async getFolloweesCount(

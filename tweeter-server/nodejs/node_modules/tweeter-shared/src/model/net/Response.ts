@@ -2,23 +2,23 @@ import { AuthToken } from "../domain/AuthToken";
 import { User } from "../domain/User";
 
 
-export class Response {
-  private _success: boolean;
-  private _message: string | null;
+  export class Response {
+    private _success: boolean;
+    private _message: string | null;
 
-  constructor(success: boolean, message: string | null = null) {
-    this._success = success;
-    this._message = message;
-  }
+    constructor(success: boolean, message: string | null = null) {
+      this._success = success;
+      this._message = message;
+    }
 
-  get success() {
-    return this._success;
-  }
+    get success() {
+      return this._success;
+    }
 
-  get message() {
-    return this._message;
+    get message() {
+      return this._message;
+    }
   }
-}
 
 interface ResponseJson {
   _success: boolean;
@@ -162,6 +162,49 @@ export class GetNumberResponse extends Response {
     return new GetNumberResponse(
       jsonObject._success,
       deserializedNumber,
+      jsonObject._message
+    );
+  }
+}
+
+
+
+export class GetBooleanResponse extends Response {
+  private _value: boolean;
+
+  constructor(
+    success: boolean,
+    value: boolean,
+    message: string | null = null
+  ) {
+    super(success, message);
+    this._value = value;
+  }
+
+  get value() {
+    return this._value;
+  }
+
+
+  static fromJson(json: JSON): GetBooleanResponse {
+    interface GetBooleanResponseJson extends ResponseJson {
+      _value: JSON;
+    }
+
+    const jsonObject: GetBooleanResponseJson =
+      json as unknown as GetBooleanResponseJson;
+    const deserializedBoolean: boolean = Boolean(jsonObject._value); //Might not work
+
+    if (deserializedBoolean === null) {
+      throw new Error(
+        "GetNumberResponse, could not deserialize user with json:\n" +
+          JSON.stringify(jsonObject._value)
+      );
+    }
+
+    return new GetBooleanResponse(
+      jsonObject._success,
+      deserializedBoolean,
       jsonObject._message
     );
   }

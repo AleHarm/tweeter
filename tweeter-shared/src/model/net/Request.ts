@@ -6,30 +6,6 @@ export interface Request{
   
 }
 
-export class GetFolloweesCountRequest implements Request{
-
-  authToken: AuthToken;
-  user: User;
-
-  constructor(authToken: AuthToken, user: User){
-
-    this.authToken = authToken;
-    this.user = user;
-  }
-}
-
-export class GetFollowersCountRequest implements Request{
-
-  authToken: AuthToken;
-  user: User;
-
-  constructor(authToken: AuthToken, user: User){
-
-    this.authToken = authToken;
-    this.user = user;
-  }
-}
-
 export class GetUserRequest implements Request{
 
   alias: string;
@@ -85,5 +61,43 @@ export class RegisterRequest implements Request{
     this.alias = alias;
     this.password = password;
     this.imageStringBase64 = imageStringBase64;
+  }
+}
+
+export class GetFolloweesCountRequest implements Request{
+
+  authToken: AuthToken;
+  user: User;
+
+  constructor(authToken: AuthToken, user: User){
+
+    this.authToken = authToken;
+    this.user = user;
+  }
+}
+
+export class GetFollowersCountRequest implements Request{
+
+  authToken: AuthToken;
+  user: User;
+
+  constructor(authToken: AuthToken, user: User){
+
+    this.authToken = authToken;
+    this.user = user;
+  }
+}
+
+export class GetIsFollowerStatusRequest implements Request{
+
+  authToken: AuthToken;
+  user: User;
+  selectedUser: User;
+
+  constructor(authToken: AuthToken, user: User, selectedUser: User){
+
+    this.authToken = authToken;
+    this.user = user;
+    this.selectedUser = selectedUser;
   }
 }

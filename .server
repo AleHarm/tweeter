@@ -6,5 +6,6 @@ register
 getUser
 getFollowersCount
 getFolloweesCount
+getIsFollowerStatus
 '
-LAMBDALAYER_ARN='arn:aws:lambda:us-east-2:058264231368:layer:tweeterServer:14'
+LAMBDALAYER_ARN='arn:aws:lambda:us-east-2:058264231368:layer:tweeterServer:15'

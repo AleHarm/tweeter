@@ -76,5 +76,16 @@ class UserService {
         });
     }
     ;
+    getIsFollowerStatus(authToken, user, selectedUser) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // TODO: Replace with the result of calling server
+            let value = yield tweeter_shared_1.FakeData.instance.isFollower();
+            if (value === null) {
+                throw new Error("[BadRequest] Invalid user or authToken");
+            }
+            return [true, value];
+        });
+    }
+    ;
 }
 exports.UserService = UserService;

@@ -1,14 +1,14 @@
 -AWS
-	- Create lambda on AWS 	
-	- Change lambda handler URL to 'dist/lambda/<FunctionName>Lambda.handler' 
-	- Add resource path in API Gateway 
-		- Create resource (enable CORS) 
-		- Add POST method to path 
-		- Enable CORS on resource path (for POST)
-		- Add 400 error 
-			- Create Method Response on POST with 400 and body type 'application/json' 
-			- Create Integration Response on POST with '^\[BadRequest\].*' REGEX 
-		- Deploy API with dev 
+	- Create lambda on AWS X
+	- Change lambda handler URL to 'dist/lambda/<FunctionName>Lambda.handler' X
+	- Add resource path in API Gateway X
+		- Create resource (enable CORS) X
+		- Add POST method to path X
+		- Enable CORS on resource path (for POST) X
+		- Add 400 error X
+			- Create Method Response on POST with 400 and body type 'application/json' X
+			- Create Integration Response on POST with '^\[BadRequest\].*' REGEX X
+		- Deploy API with dev X
 - Tweeter-web
 	- Open relevant service 
 		- Create request and response above current code in relevant function 

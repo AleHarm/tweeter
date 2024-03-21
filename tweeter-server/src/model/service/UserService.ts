@@ -85,4 +85,19 @@ export class UserService{
 
     return [true, value];
   };
+
+  public async getIsFollowerStatus(
+    authToken: AuthToken,
+    user: User,
+    selectedUser: User
+  ): Promise<[boolean, boolean]>{
+     // TODO: Replace with the result of calling server
+    let value = await FakeData.instance.isFollower();
+
+    if (value === null) {
+      throw new Error("[BadRequest] Invalid user or authToken");
+    }
+
+    return [true, value];
+  };
 }
