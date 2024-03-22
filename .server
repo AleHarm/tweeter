@@ -11,5 +11,6 @@ postStatus
 loadMoreFeedItems
 loadMoreStoryItems
 loadMoreFollowers
+loadMoreFollowees
 '
-LAMBDALAYER_ARN='arn:aws:lambda:us-east-2:058264231368:layer:tweeterServer:21'
+LAMBDALAYER_ARN='arn:aws:lambda:us-east-2:058264231368:layer:tweeterServer:22'

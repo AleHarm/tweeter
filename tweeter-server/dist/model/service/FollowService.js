@@ -22,5 +22,15 @@ class FollowService {
             return [true, paginatedUserItems];
         });
     }
+    loadMoreFollowees(authToken, user, pageSize, lastItem) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // TODO: Replace with the result of calling server
+            const paginatedUserItems = tweeter_shared_1.FakeData.instance.getPageOfUsers(lastItem, pageSize, user);
+            if (paginatedUserItems === null) {
+                throw new Error("[BadRequest] Invalid user or authToken");
+            }
+            return [true, paginatedUserItems];
+        });
+    }
 }
 exports.FollowService = FollowService;

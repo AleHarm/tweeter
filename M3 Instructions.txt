@@ -1,7 +1,7 @@
 -AWS 
 	- Create lambda on AWS 
 	- Change lambda handler URL to 'dist/lambda/<FunctionName>Lambda.handler' 
-	- Add resource path in API Gateway 
+	- Add resource path in API Gateway
 		- Create resource (enable CORS) 
 		- Add POST method to path 
 		- Enable CORS on resource path (for POST) 
@@ -32,7 +32,7 @@
 		- Copy tweeter-shared files into nodejs/node_modules 
 		- zip it 
 	- zip tweeter-server dist and place in parent folder (tweeter-web-starter) 
-	- Update lambdas 
+	- Update lambdas
 		- Update .server file with proper lambda names 
 		- Run uploadLambdas.sh 
 	- Update layer 

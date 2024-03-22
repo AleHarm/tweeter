@@ -97,4 +97,11 @@ export class ServerFacade {
 
     return UserItemsResponse.fromJson(response);
   }
+
+  async loadMoreFollowees(request: LoadUserRequest): Promise<UserItemsResponse> {
+    const endpoint = "/loadMoreFollowees";
+    const response: JSON = await this.clientCommunicator.doPost<LoadUserRequest>(request, endpoint);
+
+    return UserItemsResponse.fromJson(response);
+  }
 }

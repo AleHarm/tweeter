@@ -1,6 +1,5 @@
 import { AuthToken } from "tweeter-shared/src/model/domain/AuthToken";
 import { User } from "tweeter-shared/src/model/domain/User";
-import { FakeData } from "tweeter-shared/src/util/FakeData";
 import { ServerFacade } from "../../net/ServerFacade";
 import { 
   LoadUserRequest
@@ -29,7 +28,10 @@ export class FollowService{
     pageSize: number,
     lastItem: User | null
   ): Promise<[User[], boolean]>{
-    // TODO: Replace with the result of calling server
-    return FakeData.instance.getPageOfUsers(lastItem, pageSize, user);
+
+    let request = new LoadUserRequest(authToken, user, pageSize, lastItem);
+    let response = await this.server.loadMoreFollowees(request);
+
+    return response.paginatedUserItems;
   };
 }
