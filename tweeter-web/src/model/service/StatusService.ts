@@ -1,5 +1,4 @@
 import { Status } from "tweeter-shared/src/model/domain/Status";
-import { FakeData } from "tweeter-shared/src/util/FakeData";
 import { ServerFacade } from "../../net/ServerFacade";
 import { User, } from "../../../../tweeter-shared/src/model/domain/User";
 import { AuthToken } from "../../../../tweeter-shared/src/model/domain/AuthToken";

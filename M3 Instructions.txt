@@ -1,44 +1,44 @@
 -AWS 
-	- Create lambda on AWS X
-	- Change lambda handler URL to 'dist/lambda/<FunctionName>Lambda.handler' X
+	- Create lambda on AWS 
+	- Change lambda handler URL to 'dist/lambda/<FunctionName>Lambda.handler' 
 	- Add resource path in API Gateway 
-		- Create resource (enable CORS) X
-		- Add POST method to path X
-		- Enable CORS on resource path (for POST) X
+		- Create resource (enable CORS) 
+		- Add POST method to path 
+		- Enable CORS on resource path (for POST) 
 		- Add 400 error 
-			- Create Method Response on POST with 400 and body type 'application/json' X
-			- Create Integration Response on POST with '^\[BadRequest\].*' REGEX X
-		- Deploy API with dev X
+			- Create Method Response on POST with 400 and body type 'application/json' 
+			- Create Integration Response on POST with '^\[BadRequest\].*' REGEX 
+		- Deploy API with dev 
 - Tweeter-web 
 	- Open relevant service 
-		- Create request and response above current code in relevant function X
-		- Import non-existent request from tweeter-shared (using other imports as a template) X
+		- Create request and response above current code in relevant function 
+		- Import non-existent request from tweeter-shared (using other imports as a template) 
 	- Open ServerFacade 
-		- Copy another function as a template X
-		- Change types as appropriate X
-		- Import non-existent types X
+		- Copy another function as a template 
+		- Change types as appropriate 
+		- Import non-existent types 
 - Tweeter-shared 
-	- Add request to request class X
-	- Add reseponse to Response if needed X
-	- Export request from index.ts X
-	- Build (so tweeter-server can see values) X
+	- Add request to request class 
+	- Add reseponse to Response if needed 
+	- Export request from index.ts 
+	- Build (so tweeter-server can see values) 
 - Tweeter-server 
-	- Make lambda (use dist for imports) X
-	- Add function to relevant service class (Cut code from tweeter-web service class) X
+	- Make lambda (use dist for imports) 
+	- Add function to relevant service class (Cut code from tweeter-web service class) 
 - Building 
-	- tsc tweeter-server X
-	- create nodejs file X
-		- Place node_modules file inside X
-		- Copy tweeter-shared files into nodejs/node_modules X
-		- zip it X
-	- zip tweeter-server dist and place in parent folder (tweeter-web-starter) X
+	- tsc tweeter-server 
+	- create nodejs file 
+		- Place node_modules file inside 
+		- Copy tweeter-shared files into nodejs/node_modules 
+		- zip it 
+	- zip tweeter-server dist and place in parent folder (tweeter-web-starter) 
 	- Update lambdas 
-		- Update .server file with proper lambda names X
-		- Run uploadLambdas.sh X
+		- Update .server file with proper lambda names 
+		- Run uploadLambdas.sh 
 	- Update layer 
-		- Go to AWS and upload nodejs zip as new layer version (add node.js 20.x as compatible runtime) X
-		- update .server with new version number X
-		- Run updateLayera.sh X
+		- Go to AWS and upload nodejs zip as new layer version (add node.js 20.x as compatible runtime) 
+		- update .server with new version number 
+		- Run updateLayera.sh 
 	- build tweeter-web 
 	- run tweeter-web 
 

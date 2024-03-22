@@ -130,3 +130,19 @@ export class LoadStatusRequest implements Request{
     this.lastItem = lastItem;
   }
 }
+
+export class LoadUserRequest implements Request{
+
+  authToken: AuthToken;
+  user: User;
+  pageSize: number;
+  lastItem: User | null;
+
+  constructor(authToken: AuthToken, user: User, pageSize: number, lastItem: User | null){
+
+    this.authToken = authToken;
+    this.user = user;
+    this.pageSize = pageSize;
+    this.lastItem = lastItem;
+  }
+}

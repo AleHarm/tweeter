@@ -211,48 +211,6 @@ export class GetBooleanResponse extends Response {
   }
 }
 
-
-// export class StatusItemsResponse extends Response {
-//   private _paginatedStatusItems: [Status[], boolean];
-
-//   constructor(
-//     success: boolean,
-//     paginatedStatusItems: [Status[], boolean],
-//     message: string | null = null
-//   ) {
-//     super(success, message);
-//     this._paginatedStatusItems = paginatedStatusItems;
-//   }
-
-//   get paginatedStatusItems() {
-//     return this._paginatedStatusItems;
-//   }
-
-
-//   static fromJson(json: JSON): StatusItemsResponse {
-//     interface StatusItemsResponseJson extends ResponseJson {
-//       _paginatedStatusItems: JSON;
-//     }
-
-//     const jsonObject: StatusItemsResponseJson =
-//       json as unknown as StatusItemsResponseJson;
-//     const deserializedPaginatedStatusItems: [Status[], boolean] = JSON.parse(JSON.stringify(jsonObject._paginatedStatusItems)); //MIGHT NOT WORK
-
-//     if (deserializedPaginatedStatusItems === null) {
-//       throw new Error(
-//         "StatusItemsResponse, could not deserialize paginatedStatusItems with json:\n" +
-//           JSON.stringify(jsonObject._paginatedStatusItems)
-//       );
-//     }
-
-//     return new StatusItemsResponse(
-//       jsonObject._success,
-//       deserializedPaginatedStatusItems,
-//       jsonObject._message
-//     );
-//   }
-// }
-
 export class StatusItemsResponse extends Response {
   private _paginatedStatusItems: [Status[], boolean];
 
@@ -289,6 +247,47 @@ export class StatusItemsResponse extends Response {
     return new StatusItemsResponse(
       jsonObject._success,
       [statusItems, booleanValue],
+      jsonObject._message
+    );
+  }
+}
+
+export class UserItemsResponse extends Response {
+  private _paginatedUserItems: [User[], boolean];
+
+  constructor(
+    success: boolean,
+    paginatedUserItems: [User[], boolean],
+    message: string | null = null
+  ) {
+    super(success, message);
+    this._paginatedUserItems = paginatedUserItems;
+  }
+
+  get paginatedUserItems() {
+    return this._paginatedUserItems;
+  }
+
+  static fromJson(json: any): UserItemsResponse {
+    interface UserItemsResponseJson extends ResponseJson {
+      _paginatedUserItems: [any[], boolean];
+    }
+
+    const jsonObject: UserItemsResponseJson = json;
+    const { _paginatedUserItems } = jsonObject;
+
+    if (!_paginatedUserItems || !Array.isArray(_paginatedUserItems)) {
+      throw new Error("Invalid or missing paginated user items in JSON.");
+    }
+
+    const [userArray, booleanValue] = _paginatedUserItems;
+    const userItems: User[] = userArray.map((userJson: any) => {
+      return User.fromJson(JSON.stringify(userJson)) as User;
+    });
+
+    return new UserItemsResponse(
+      jsonObject._success,
+      [userItems, booleanValue],
       jsonObject._message
     );
   }
