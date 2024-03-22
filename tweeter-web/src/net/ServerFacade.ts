@@ -81,4 +81,11 @@ export class ServerFacade {
 
     return StatusItemsResponse.fromJson(response);
   }
+
+  async loadMoreStoryItems(request: LoadStatusRequest): Promise<StatusItemsResponse> {
+    const endpoint = "/loadMoreStoryItems";
+    const response: JSON = await this.clientCommunicator.doPost<LoadStatusRequest>(request, endpoint);
+
+    return StatusItemsResponse.fromJson(response);
+  }
 }

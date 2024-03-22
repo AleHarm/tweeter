@@ -9,5 +9,6 @@ getFolloweesCount
 getIsFollowerStatus
 postStatus
 loadMoreFeedItems
+loadMoreStoryItems
 '
-LAMBDALAYER_ARN='arn:aws:lambda:us-east-2:058264231368:layer:tweeterServer:19'
+LAMBDALAYER_ARN='arn:aws:lambda:us-east-2:058264231368:layer:tweeterServer:20'

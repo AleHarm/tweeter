@@ -33,5 +33,15 @@ class StatusService {
             return [true, paginatedStatusItems];
         });
     }
+    loadMoreStoryItems(authToken, user, pageSize, lastItem) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // TODO: Replace with the result of calling server
+            const paginatedStatusItems = tweeter_shared_1.FakeData.instance.getPageOfStatuses(lastItem, pageSize);
+            if (paginatedStatusItems === null) {
+                throw new Error("[BadRequest] Invalid user or authToken");
+            }
+            return [true, paginatedStatusItems];
+        });
+    }
 }
 exports.StatusService = StatusService;
