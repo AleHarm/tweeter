@@ -1,24 +1,25 @@
 import { AuthToken } from "../domain/AuthToken";
 import { User } from "../domain/User";
+import { Status } from "../domain/Status";
 
 
-  export class Response {
-    private _success: boolean;
-    private _message: string | null;
+export class Response {
+  private _success: boolean;
+  private _message: string | null;
 
-    constructor(success: boolean, message: string | null = null) {
-      this._success = success;
-      this._message = message;
-    }
-
-    get success() {
-      return this._success;
-    }
-
-    get message() {
-      return this._message;
-    }
+  constructor(success: boolean, message: string | null = null) {
+    this._success = success;
+    this._message = message;
   }
+
+  get success() {
+    return this._success;
+  }
+
+  get message() {
+    return this._message;
+  }
+}
 
 interface ResponseJson {
   _success: boolean;
@@ -193,7 +194,7 @@ export class GetBooleanResponse extends Response {
 
     const jsonObject: GetBooleanResponseJson =
       json as unknown as GetBooleanResponseJson;
-    const deserializedBoolean: boolean = Boolean(jsonObject._value); //Might not work
+    const deserializedBoolean: boolean = Boolean(jsonObject._value);
 
     if (deserializedBoolean === null) {
       throw new Error(
@@ -205,6 +206,89 @@ export class GetBooleanResponse extends Response {
     return new GetBooleanResponse(
       jsonObject._success,
       deserializedBoolean,
+      jsonObject._message
+    );
+  }
+}
+
+
+// export class StatusItemsResponse extends Response {
+//   private _paginatedStatusItems: [Status[], boolean];
+
+//   constructor(
+//     success: boolean,
+//     paginatedStatusItems: [Status[], boolean],
+//     message: string | null = null
+//   ) {
+//     super(success, message);
+//     this._paginatedStatusItems = paginatedStatusItems;
+//   }
+
+//   get paginatedStatusItems() {
+//     return this._paginatedStatusItems;
+//   }
+
+
+//   static fromJson(json: JSON): StatusItemsResponse {
+//     interface StatusItemsResponseJson extends ResponseJson {
+//       _paginatedStatusItems: JSON;
+//     }
+
+//     const jsonObject: StatusItemsResponseJson =
+//       json as unknown as StatusItemsResponseJson;
+//     const deserializedPaginatedStatusItems: [Status[], boolean] = JSON.parse(JSON.stringify(jsonObject._paginatedStatusItems)); //MIGHT NOT WORK
+
+//     if (deserializedPaginatedStatusItems === null) {
+//       throw new Error(
+//         "StatusItemsResponse, could not deserialize paginatedStatusItems with json:\n" +
+//           JSON.stringify(jsonObject._paginatedStatusItems)
+//       );
+//     }
+
+//     return new StatusItemsResponse(
+//       jsonObject._success,
+//       deserializedPaginatedStatusItems,
+//       jsonObject._message
+//     );
+//   }
+// }
+
+export class StatusItemsResponse extends Response {
+  private _paginatedStatusItems: [Status[], boolean];
+
+  constructor(
+    success: boolean,
+    paginatedStatusItems: [Status[], boolean],
+    message: string | null = null
+  ) {
+    super(success, message);
+    this._paginatedStatusItems = paginatedStatusItems;
+  }
+
+  get paginatedStatusItems() {
+    return this._paginatedStatusItems;
+  }
+
+  static fromJson(json: any): StatusItemsResponse {
+    interface StatusItemsResponseJson extends ResponseJson {
+      _paginatedStatusItems: [any[], boolean];
+    }
+
+    const jsonObject: StatusItemsResponseJson = json;
+    const { _paginatedStatusItems } = jsonObject;
+
+    if (!_paginatedStatusItems || !Array.isArray(_paginatedStatusItems)) {
+      throw new Error("Invalid or missing paginated status items in JSON.");
+    }
+
+    const [statusArray, booleanValue] = _paginatedStatusItems;
+    const statusItems: Status[] = statusArray.map((statusJson: any) => {
+      return Status.fromJson(JSON.stringify(statusJson)) as Status;
+    });
+
+    return new StatusItemsResponse(
+      jsonObject._success,
+      [statusItems, booleanValue],
       jsonObject._message
     );
   }

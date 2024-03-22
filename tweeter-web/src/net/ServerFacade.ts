@@ -7,12 +7,14 @@ import {
   GetFollowersCountRequest,
   GetFolloweesCountRequest,
   GetIsFollowerStatusRequest,
-  PostStatusRequest } from "tweeter-shared/src/model/net/Request";
+  PostStatusRequest,
+  LoadStatusRequest } from "tweeter-shared/src/model/net/Request";
 import { 
   AuthenticateResponse,
   GetNumberResponse,
   GetUserResponse,
-  GetBooleanResponse } from "tweeter-shared/src/model/net/Response";
+  GetBooleanResponse,
+  StatusItemsResponse } from "tweeter-shared/src/model/net/Response";
 
 
 export class ServerFacade {
@@ -71,5 +73,12 @@ export class ServerFacade {
   async postStatus(request: PostStatusRequest): Promise<void> {
     const endpoint = "/postStatus";
     await this.clientCommunicator.doPost<PostStatusRequest>(request, endpoint);
+  }
+
+  async loadMoreFeedItems(request: LoadStatusRequest): Promise<StatusItemsResponse> {
+    const endpoint = "/loadMoreFeedItems";
+    const response: JSON = await this.clientCommunicator.doPost<LoadStatusRequest>(request, endpoint);
+
+    return StatusItemsResponse.fromJson(response);
   }
 }

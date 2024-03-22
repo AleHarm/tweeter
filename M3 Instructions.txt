@@ -1,22 +1,22 @@
 -AWS 
-	- Create lambda on AWS 
-	- Change lambda handler URL to 'dist/lambda/<FunctionName>Lambda.handler' 
+	- Create lambda on AWS X
+	- Change lambda handler URL to 'dist/lambda/<FunctionName>Lambda.handler' X
 	- Add resource path in API Gateway 
-		- Create resource (enable CORS) 
-		- Add POST method to path 
-		- Enable CORS on resource path (for POST) 
-		- Add 400 error 
-			- Create Method Response on POST with 400 and body type 'application/json' 
-			- Create Integration Response on POST with '^\[BadRequest\].*' REGEX 
-		- Deploy API with dev 
+		- Create resource (enable CORS) X
+		- Add POST method to path X
+		- Enable CORS on resource path (for POST) X
+		- Add 400 error X
+			- Create Method Response on POST with 400 and body type 'application/json' X
+			- Create Integration Response on POST with '^\[BadRequest\].*' REGEX X
+		- Deploy API with dev X
 - Tweeter-web 
-	- Open relevant service 
-		- Create request and response above current code in relevant function 
-		- Import non-existent request from tweeter-shared (using other imports as a template) 
+	- Open relevant service X
+		- Create request and response above current code in relevant function X
+		- Import non-existent request from tweeter-shared (using other imports as a template) X
 	- Open ServerFacade 
-		- Copy another function as a template 
-		- Change types as appropriate 
-		- Import non-existent types 
+		- Copy another function as a template X
+		- Change types as appropriate X
+		- Import non-existent types X
 - Tweeter-shared 
 	- Add request to request class 
 	- Add reseponse to Response if needed 

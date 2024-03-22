@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StatusService = void 0;
+const tweeter_shared_1 = require("tweeter-shared");
 class StatusService {
     postStatus(authToken, newStatus) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -22,5 +23,15 @@ class StatusService {
         });
     }
     ;
+    loadMoreFeedItems(authToken, user, pageSize, lastItem) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // TODO: Replace with the result of calling server
+            const paginatedStatusItems = tweeter_shared_1.FakeData.instance.getPageOfStatuses(lastItem, pageSize);
+            if (paginatedStatusItems === null) {
+                throw new Error("[BadRequest] Invalid user or authToken");
+            }
+            return [true, paginatedStatusItems];
+        });
+    }
 }
 exports.StatusService = StatusService;

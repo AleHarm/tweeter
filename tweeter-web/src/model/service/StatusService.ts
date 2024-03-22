@@ -3,7 +3,10 @@ import { FakeData } from "tweeter-shared/src/util/FakeData";
 import { ServerFacade } from "../../net/ServerFacade";
 import { User, } from "../../../../tweeter-shared/src/model/domain/User";
 import { AuthToken } from "../../../../tweeter-shared/src/model/domain/AuthToken";
-import { PostStatusRequest } from "../../../../tweeter-shared/src/model/net/Request";
+import { 
+  PostStatusRequest,
+  LoadStatusRequest
+ } from "../../../../tweeter-shared/src/model/net/Request";
 
 
 export class StatusService{
@@ -16,8 +19,11 @@ export class StatusService{
     pageSize: number,
     lastItem: Status | null
   ): Promise<[Status[], boolean]>{
-    // TODO: Replace with the result of calling server
-    return FakeData.instance.getPageOfStatuses(lastItem, pageSize);
+
+    let request = new LoadStatusRequest(authToken, user, pageSize, lastItem);
+    let response = await this.server.loadMoreFeedItems(request);
+
+    return response.paginatedStatusItems;
   };
 
   public async loadMoreStoryItems(

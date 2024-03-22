@@ -16,6 +16,7 @@ export {
   GetFollowersCountRequest,
   GetFolloweesCountRequest,
   GetIsFollowerStatusRequest,
-  PostStatusRequest } from "./model/net/Request";
+  PostStatusRequest,
+  LoadStatusRequest } from "./model/net/Request";
 export { Response } from "./model/net/Response";
 export { AuthenticateResponse } from "./model/net/Response";

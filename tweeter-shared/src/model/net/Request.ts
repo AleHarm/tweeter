@@ -114,3 +114,19 @@ export class PostStatusRequest implements Request{
     this.newStatus = newStatus;
   }
 }
+
+export class LoadStatusRequest implements Request{
+
+  authToken: AuthToken;
+  user: User;
+  pageSize: number;
+  lastItem: Status | null;
+
+  constructor(authToken: AuthToken, user: User, pageSize: number, lastItem: Status | null){
+
+    this.authToken = authToken;
+    this.user = user;
+    this.pageSize = pageSize;
+    this.lastItem = lastItem;
+  }
+}
