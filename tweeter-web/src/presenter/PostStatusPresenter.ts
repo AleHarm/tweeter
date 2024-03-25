@@ -1,6 +1,8 @@
-import { AuthToken, Status, User } from "tweeter-shared";
-import { StatusService } from "../model/service/StatusService";
+import { Status } from "tweeter-shared/src/model/domain/Status";
 import { Dispatch, SetStateAction } from "react";
+import { User } from "tweeter-shared/src/model/domain/User";
+import { StatusService } from "../model/service/StatusService";
+import { AuthToken } from "tweeter-shared/src/model/domain/AuthToken";
 
 export interface PostStatusView{
 

@@ -1,0 +1,16 @@
+BUCKET='tweetercs340w2024'
+EDIT_LAMBDALIST='
+login
+logout
+register
+getUser
+getFollowersCount
+getFolloweesCount
+getIsFollowerStatus
+postStatus
+loadMoreFeedItems
+loadMoreStoryItems
+loadMoreFollowers
+loadMoreFollowees
+'
+LAMBDALAYER_ARN='arn:aws:lambda:us-east-2:058264231368:layer:tweeterServer:22'

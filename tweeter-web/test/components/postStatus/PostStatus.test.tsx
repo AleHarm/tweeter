@@ -5,8 +5,9 @@ import "@testing-library/jest-dom";
 import React from "react";
 import useUserInfo from "../../../src/components/userInfo/UserInfoHook";
 import { anything, instance, mock, verify } from "ts-mockito";
-import { AuthToken, User } from "tweeter-shared";
 import { PostStatusPresenter } from "../../../src/presenter/PostStatusPresenter";
+import { User } from "tweeter-shared/src/model/domain/User";
+import { AuthToken } from "tweeter-shared/src/model/domain/AuthToken";
 
 jest.mock("../../../src/components/userInfo/UserInfoHook", () => ({
   ...jest.requireActual("../../../src/components/userInfo/UserInfoHook"),

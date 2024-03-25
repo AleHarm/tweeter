@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Post from "../statusItem/Post";
-import { Status } from "tweeter-shared";
 import useUserNavigation from "../userInfo/UserNavigationHook";
+import { Status } from "tweeter-shared/src/model/domain/Status";
 
 
 interface Props{

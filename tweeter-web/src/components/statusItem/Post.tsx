@@ -1,6 +1,7 @@
-import { Status, Type } from "tweeter-shared";
 import { Link } from "react-router-dom";
 import useUserNavigation from "../userInfo/UserNavigationHook";
+import { Type } from "tweeter-shared/src/model/domain/PostSegment";
+import { Status } from "tweeter-shared/src/model/domain/Status";
 
 interface Props {
   status: Status;

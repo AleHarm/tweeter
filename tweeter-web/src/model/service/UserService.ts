@@ -1,31 +1,53 @@
-import { AuthToken, User, FakeData } from "tweeter-shared";
 import { Buffer } from "buffer";
+import { ServerFacade } from "../../net/ServerFacade";
+import { User, } from "../../../../tweeter-shared/src/model/domain/User";
+import { AuthToken } from "../../../../tweeter-shared/src/model/domain/AuthToken";
+import { 
+  LoginRequest, 
+  LogoutRequest, 
+  RegisterRequest, 
+  GetUserRequest, 
+  GetFollowersCountRequest,
+  GetFolloweesCountRequest,
+  GetIsFollowerStatusRequest } from "../../../../tweeter-shared/src/model/net/Request";
+
 
 export class UserService{
+
+  server = new ServerFacade();
 
   public async getIsFollowerStatus (
     authToken: AuthToken,
     user: User,
     selectedUser: User
   ): Promise<boolean>{
-    // TODO: Replace with the result of calling server
-    return FakeData.instance.isFollower();
+
+    let request = new GetIsFollowerStatusRequest(authToken, user, selectedUser);
+    let response = await this.server.getIsFollowerStatus(request);
+
+    return response.value;
   };
 
   public async getFolloweesCount(
     authToken: AuthToken,
     user: User
   ): Promise<number>{
-    // TODO: Replace with the result of calling server
-    return FakeData.instance.getFolloweesCount(user);
+
+    let request = new GetFolloweesCountRequest(authToken, user);
+    let response = await this.server.getFolloweesCount(request);
+
+    return response.value;
   };
 
   public async getFollowersCount(
     authToken: AuthToken,
     user: User
   ): Promise<number>{
-    // TODO: Replace with the result of calling server
-    return FakeData.instance.getFollowersCount(user);
+
+    let request = new GetFollowersCountRequest(authToken, user);
+    let response = await this.server.getFollowersCount(request);
+
+    return response.value;
   };
 
   public async register(
@@ -39,39 +61,35 @@ export class UserService{
     let imageStringBase64: string =
       Buffer.from(userImageBytes).toString("base64");
 
-    // TODO: Replace with the result of calling the server
-    let user = FakeData.instance.firstUser;
+    let request = new RegisterRequest(firstName, lastName, alias, password, imageStringBase64);
+    let response = await this.server.register(request);
 
-    if (user === null) {
-      throw new Error("Invalid registration");
-    }
-
-    return [user, FakeData.instance.authToken];
+    return [response.user, response.token];
   };
 
   public async getUser (
     authToken: AuthToken,
     alias: string
   ): Promise<User | null>{
-    return FakeData.instance.findUserByAlias(alias);
+
+    let request = new GetUserRequest(alias, authToken);
+    let response = await this.server.getUser(request);
+
+    return response.user;
   };
 
   public async login(
     alias: string,
     password: string
   ): Promise<[User, AuthToken]>{
-    // TODO: Replace with the result of calling the server
-    let user = FakeData.instance.firstUser;
+    let request = new LoginRequest(alias, password);
+    let response = await this.server.login(request);
 
-    if (user === null) {
-      throw new Error("Invalid alias or password");
-    }
-
-    return [user, FakeData.instance.authToken];
+    return [response.user, response.token];
   };
 
   public async logout (authToken: AuthToken): Promise<void> {
-    // Pause so we can see the logging out message. Delete when the call to the server is implemented.
-    await new Promise((res) => setTimeout(res, 1000));
+    let request = new LogoutRequest(authToken);
+    await this.server.logout(request);
   };
 }
